@@ -16,8 +16,7 @@ def main():
     t_sol = (0.5, 1.5, 3.0) # times of interest, s
     t_f = 3.0 # final time, s
     q = 0.5 # for blended discretization
-    omega = 1.8 # for streamfunction SOR iteration
-
+    omega = 1.8972 # for streamfunction SOR iteration
 
     # physics params
     U = 5 # m/s
@@ -31,12 +30,11 @@ def main():
     y_grid = np.arange(0, Ly+dy, dy)
     u = result[0]
     v = result[1]
-    plt.quiver(x_grid, y_grid, u[:,:,20].T, v[:,:,20].T)
+    fig1 = plt.figure()
+    plt.quiver(x_grid, y_grid, u[:,:,int(t_f/dt)-1].T, v[:,:,int(t_f/dt)-1].T)
+    gig2 = plt.figure()
+    plt.streamplot(x_grid, y_grid, u[:,:,int(t_f/dt)-1].T, v[:,:,int(t_f/dt)-1].T, density=4/3, linewidth=1)
     plt.show()
-
-
-
-
 
 if __name__ == '__main__':
     main()
