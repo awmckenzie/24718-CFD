@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
+
 import HW6_Q1 as Q1
 
 
@@ -13,7 +15,7 @@ def main():
     dt = 0.002 # s
     t_sol = (0.5, 1.5, 3.0) # times of interest, s
     t_f = 3.0 # final time, s
-    q = 0 # for blended discretization
+    q = 0.5 # for blended discretization
     omega = 1.8 # for streamfunction SOR iteration
 
 
@@ -24,6 +26,13 @@ def main():
     nu = 1 / (Re / (U * Lx)) # m^2 / s
 
     result = Q1.solve(Lx, Ly, dx, dy, t_f, t_sol, dt, q, omega, nu, U)
+
+    x_grid = np.arange(0, Lx+dx, dx)
+    y_grid = np.arange(0, Ly+dy, dy)
+    u = result[0]
+    v = result[1]
+    plt.quiver(x_grid, y_grid, u[:,:,20].T, v[:,:,20].T)
+    plt.show()
 
 
 

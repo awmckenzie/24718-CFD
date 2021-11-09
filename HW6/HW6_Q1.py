@@ -122,8 +122,16 @@ def solve(Lx, Ly, dx, dy, t_f, t_sol, dt, q, omega, nu, U):
         #phi[:,:,n+1] = SOR(phi[:,:,n], w[:,:,n+1], x_int_nodes, y_int_nodes, omega, dx, dy)
         # if(n > 100):
         #     ipdb.set_trace()
-        print(n+1)
+        #print(n+1)
+
+        # solve for velocity field, centered differences
+        for l in range(1, x_int_nodes+1):
+            for j in range(1, y_int_nodes+1):
+                u[l,j,n+1] = (phi[l,j+1,n+1] - phi[l,j-1,n+1]) / (2*dy)
+                v[l,j,n+1] = -(phi[l+1,j,n+1] - phi[l-1,j,n+1]) / (2*dx)
+        
+        print(u[:,y_int_nodes+1,n+1])
         
 
         
-    return 'ok'
+    return (u, v, w, phi)
