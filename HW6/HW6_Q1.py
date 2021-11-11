@@ -19,7 +19,6 @@ def SOR(psi, w, x_int_nodes, y_int_nodes, omega, dx, dy, max_error=1e-6):
                 psi[l,j] = ((1-omega) * psi_temp[l,j] + omega * (s * ((1/dx**2) * (psi[l-1,j] + psi_temp[l+1,j]) + 
                                 (1/dy**2) * (psi[l,j-1] + psi_temp[l,j+1]) - w[l,j])))
 
-        # psi[1:x_int_nodes+1,y_int_nodes+1] = psi[1:x_int_nodes+1,y_int_nodes] + 5*dy
         for l in range(1, x_int_nodes+1):
             for j in range(1, y_int_nodes+1):
                 error= np.abs(psi_temp[l,j] - psi[l,j])
@@ -27,7 +26,6 @@ def SOR(psi, w, x_int_nodes, y_int_nodes, omega, dx, dy, max_error=1e-6):
                     num_bad_nodes += 1
 
         iter += 1
-    #print(iter)
 
     return psi
 
@@ -46,15 +44,12 @@ def GS(psi, w, x_int_nodes, y_int_nodes, dx, max_error=1e-6):
             for j in range(1, y_int_nodes+1):
                 psi[l,j] = (psi[l-1,j] + psi[l+1,j] + psi[l,j-1] + psi[l,j+1])/4 + (dx**2)*w[l,j]/4
 
-        #psi[1:x_int_nodes+1,y_int_nodes+1] = psi[1:x_int_nodes+1,y_int_nodes] + 5*dx
-
         for l in range(1, x_int_nodes+1):
             for j in range(1, y_int_nodes+1):
                 error = np.abs(psi_temp[l,j] - psi[l,j])
                 if error >= max_error:
                     num_bad_nodes += 1
         iter += 1
-    # print(iter)
 
     return psi
 
@@ -80,9 +75,6 @@ def solve(Lx, Ly, dx, dy, t_f, t_sol, dt, q, omega, nu, U):
 
     psi[:,:,0] = GS(psi[:,:,0], w[:,:,0], x_int_nodes, y_int_nodes, dx)
     # psi[:,:,0] = SOR(psi[:,:,0], w[:,:,0], x_int_nodes, y_int_nodes, omega, dx, dy)
-
-
-    
 
     for n in range(t_steps-1):
 
@@ -125,9 +117,6 @@ def solve(Lx, Ly, dx, dy, t_f, t_sol, dt, q, omega, nu, U):
 
         psi[:,:,n+1] = GS(psi[:,:,n], w[:,:,n+1], x_int_nodes, y_int_nodes, dx)
         # psi[:,:,n+1] = SOR(psi[:,:,n], w[:,:,n+1], x_int_nodes, y_int_nodes, omega, dx, dy)
-        # if(n > 100):
-        #     ipdb.set_trace()
-        #print(n+1)
 
         # solve for velocity field, centered differences
         for l in range(1, x_int_nodes+1):
@@ -136,7 +125,5 @@ def solve(Lx, Ly, dx, dy, t_f, t_sol, dt, q, omega, nu, U):
                 v[l,j,n+1] = -(psi[l+1,j,n+1] - psi[l-1,j,n+1]) / (2*dx)
         
         #print(u[:,y_int_nodes+1,n+1])
-        
-
-        
+         
     return (u, v, w, psi)
