@@ -157,7 +157,7 @@ def solve(Lx, Ly, dx, dy, t_f, t_sol, dt, q, omega, nu, U, u_in):
         # psi[:,:,n+1] = GS(psi[:,:,n], w[:,:,n+1], u[:,:,n+1], v[:,:,n+1], x_int_nodes, y_int_nodes, dx, dy)
         psi[:,:,n+1] = SOR(psi[:,:,n], w[:,:,n+1], u[:,:,n+1], v[:,:,n+1], x_int_nodes, y_int_nodes, omega, dx, dy)
 
-        print(n+1)
+        #print(n+1)
 
         # solve for velocity field, centered differences
         for l in range(1, x_int_nodes+1):

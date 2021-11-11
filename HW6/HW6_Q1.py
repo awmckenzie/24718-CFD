@@ -27,7 +27,7 @@ def SOR(psi, w, x_int_nodes, y_int_nodes, omega, dx, dy, max_error=1e-6):
                     num_bad_nodes += 1
 
         iter += 1
-    print(iter)
+    #print(iter)
 
     return psi
 
@@ -127,7 +127,7 @@ def solve(Lx, Ly, dx, dy, t_f, t_sol, dt, q, omega, nu, U):
         # psi[:,:,n+1] = SOR(psi[:,:,n], w[:,:,n+1], x_int_nodes, y_int_nodes, omega, dx, dy)
         # if(n > 100):
         #     ipdb.set_trace()
-        print(n+1)
+        #print(n+1)
 
         # solve for velocity field, centered differences
         for l in range(1, x_int_nodes+1):
