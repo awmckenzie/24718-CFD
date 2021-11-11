@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import ipdb
 
 import HW6_Q1 as Q1
 
@@ -20,11 +21,12 @@ def main():
 
     # physics params
     U = 5 # m/s
+    u_in = 1.2 # inlet outlet, m/s
     rho = 1 # kg/m^3
     Re = 200
     nu = 1 / (Re / (U * Lx)) # m^2 / s
 
-    result = Q1.solve(Lx, Ly, dx, dy, t_f, t_sol, dt, q, omega, nu, U)
+    result = Q1.solve(Lx, Ly, dx, dy, t_f, t_sol, dt, q, omega, nu, U, u_in)
 
     x_grid = np.arange(0, Lx+dx, dx)
     y_grid = np.arange(0, Ly+dy, dy)
@@ -32,7 +34,7 @@ def main():
     v = result[1]
     fig1 = plt.figure()
     plt.quiver(x_grid, y_grid, u[:,:,int(t_f/dt)-1].T, v[:,:,int(t_f/dt)-1].T)
-    gig2 = plt.figure()
+    fig2 = plt.figure()
     plt.streamplot(x_grid, y_grid, u[:,:,int(t_f/dt)-1].T, v[:,:,int(t_f/dt)-1].T, density=4/3, linewidth=1)
     plt.show()
 
