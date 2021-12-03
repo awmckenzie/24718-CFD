@@ -35,7 +35,7 @@ def SOR(psi, w, u, v, x_int_nodes, y_int_nodes, omega, dx, dy, max_error=1e-6):
 
         iter += 1
         psi[:,:] = psi_temp[:,:]
-    #print(iter)
+    print(iter)
 
     return psi
 
