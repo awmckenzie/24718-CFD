@@ -5,7 +5,7 @@ import ipdb
 import HW6_Q1 as Q1
 import HW6_Q2 as Q2
 
-# hello beebis
+# hello beepis
 
 def main():
     # domain params
