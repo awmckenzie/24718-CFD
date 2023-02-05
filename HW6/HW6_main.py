@@ -5,7 +5,7 @@ import ipdb
 import HW6_Q1 as Q1
 import HW6_Q2 as Q2
 
-# hello bebis
+# hello beebis
 
 def main():
     # domain params
@@ -13,7 +13,7 @@ def main():
     Ly = 0.4 # m
 
     # scheme params
-    dx = 0.01 # m
+    dx = 0.01 # m``
     dy = 0.01 # m
     dt = 0.002 # s
     t_sol = (0.5, 1.5, 3.0) # times of interest, s
